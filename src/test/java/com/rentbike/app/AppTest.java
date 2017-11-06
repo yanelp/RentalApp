@@ -231,32 +231,4 @@ public class AppTest {
 		assertTrue(bike.getDescription().equals("bikeDetails0"));
 
 	}
-
-	/*
-	 * @Test public void testMain() { App appTest = new App();
-	 * 
-	 * 
-	 * ArrayList<Promotion> promotions = new ArrayList<Promotion>();
-	 * 
-	 * Config config = new Config(20, promotions); appTest.initialize(config);
-	 * 
-	 * app.initialize(config);
-	 * 
-	 * assertTrue(appTest.getPromotions().size() == 0);
-	 * assertTrue(appTest.getRentals().size() == 0);
-	 * assertTrue(appTest.getAvailableBikes().size() == 20);
-	 * assertTrue(appTest.getRentBikes().size() == 0);
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
-
-	@Test
-	public void testMain() {
-
-		String[] args = null;
-		App.main(args);
-
-	}
 }
