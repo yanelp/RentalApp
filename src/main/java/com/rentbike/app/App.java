@@ -8,9 +8,9 @@ import com.rentbike.model.Bike;
 import com.rentbike.model.FamilyPromotion;
 import com.rentbike.model.Promotion;
 import com.rentbike.model.Rental;
-import com.rentbike.model.RentalPerDay;
-import com.rentbike.model.RentalPerHour;
-import com.rentbike.model.RentalPerWeek;
+import com.rentbike.model.PerDayRentalType;
+import com.rentbike.model.PerHourRentalType;
+import com.rentbike.model.PerWeekRentalType;
 import com.rentbike.model.RentalType;
 
 public class App
@@ -107,7 +107,7 @@ public class App
 
 			// charge rent
 			defineTotalPrice(rental);
-			String price = String.valueOf(rental.getPriceTotalRent());
+			String price = String.valueOf(rental.getTotalPrice());
 
 			message = "Total Rental: " + price;
 
@@ -127,14 +127,14 @@ public class App
 		RentalType rentalType;
 		if (rentType == "perHour") {
 			float pricePerBike = 5;
-			rentalType = new RentalPerHour(pricePerBike);
+			rentalType = new PerHourRentalType(pricePerBike);
 		} else {
 			if (rentType == "perDay") {
 				float pricePerBike = 20;
-				rentalType = new RentalPerDay(pricePerBike);
+				rentalType = new PerDayRentalType(pricePerBike);
 			} else {
 				float pricePerBike = 60;
-				rentalType = new RentalPerWeek(pricePerBike);
+				rentalType = new PerWeekRentalType(pricePerBike);
 			}
 		}
 
@@ -150,16 +150,16 @@ public class App
 	public void defineTotalPrice(Rental rental) {
 
 		float priceTotalBikes = (rental.getBikes().size())
-				* rental.getRentalType().getPrice();
-		float partialPrice = priceTotalBikes * rental.getRentalUnit();
-		rental.setPriceTotalRent(partialPrice);
+				* rental.getType().getPrice();
+		float partialPrice = priceTotalBikes * rental.getTimeUnit();
+		rental.setTotalPrice(partialPrice);
 
 		ArrayList<Promotion> promotions = this.getPromotions();
 
 		for (Iterator<Promotion> iterator = promotions.iterator(); iterator
 				.hasNext();) {
 			Promotion promotion = (Promotion) iterator.next();
-			float priceWithPromotion = (float) promotion.applyPromotion(rental);
+			float priceWithPromotion = (float) promotion.apply(rental);
 			if ((priceWithPromotion != 0)
 					&& (priceWithPromotion < partialPrice)) {
 				partialPrice = priceWithPromotion;
@@ -167,7 +167,7 @@ public class App
 			}
 
 		}
-		rental.setPriceTotalRent(partialPrice);
+		rental.setTotalPrice(partialPrice);
 
 	}
 

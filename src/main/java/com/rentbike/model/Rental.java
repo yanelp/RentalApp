@@ -6,19 +6,19 @@ import java.util.LinkedList;
 public class Rental {
 
 	private String clientID;
-	private Date rentBegin;
+	private Date date;
 	private LinkedList<Bike> bikes;
-	private RentalType rentalType;
-	private Integer rentalUnit;
-	private float priceTotalRent;
+	private RentalType type;
+	private Integer timeUnit;
+	private float totalPrice;
 
 	public Rental(String clientID, LinkedList<Bike> bikes,
 			RentalType rentalType, Integer rentalUnit) {
 		setClientID(clientID);
-		setRentBegin(new Date());
+		setDate(new Date());
 		setBikes(bikes);
-		setRentalUnit(rentalUnit);
-		setRentalType(rentalType);
+		setTimeUnit(rentalUnit);
+		setType(rentalType);
 
 	}
 
@@ -30,12 +30,12 @@ public class Rental {
 		this.clientID = clientID;
 	}
 
-	public Date getRentBegin() {
-		return rentBegin;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setRentBegin(Date rentBegin) {
-		this.rentBegin = rentBegin;
+	public void setDate(Date rentBegin) {
+		this.date = rentBegin;
 	}
 
 	public LinkedList<Bike> getBikes() {
@@ -46,28 +46,28 @@ public class Rental {
 		this.bikes = bikes;
 	}
 
-	public Integer getRentalUnit() {
-		return rentalUnit;
+	public Integer getTimeUnit() {
+		return timeUnit;
 	}
 
-	public void setRentalUnit(Integer rentalUnit) {
-		this.rentalUnit = rentalUnit;
+	public void setTimeUnit(Integer rentalUnit) {
+		this.timeUnit = rentalUnit;
 	}
 
-	public float getPriceTotalRent() {
-		return priceTotalRent;
+	public float getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setPriceTotalRent(float priceTotalRent) {
-		this.priceTotalRent = priceTotalRent;
+	public void setTotalPrice(float priceTotalRent) {
+		this.totalPrice = priceTotalRent;
 	}
 
-	public RentalType getRentalType() {
-		return rentalType;
+	public RentalType getType() {
+		return type;
 	}
 
-	public void setRentalType(RentalType rentalType) {
-		this.rentalType = rentalType;
+	public void setType(RentalType rentalType) {
+		this.type = rentalType;
 	}
 
 }

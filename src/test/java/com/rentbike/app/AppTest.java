@@ -134,8 +134,8 @@ public class AppTest {
 		Promotion promotion = new Promotion() {
 
 			@Override
-			public float applyPromotion(Rental rental) {
-				return rental.getPriceTotalRent();
+			public float apply(Rental rental) {
+				return rental.getTotalPrice();
 			}
 		};
 
@@ -154,7 +154,7 @@ public class AppTest {
 	}
 
 	@Test
-	public void testApplyMultiplePromotion() {
+	public void testApplyMultiplePromotions() {
 
 		ArrayList<Promotion> promotions = new ArrayList<Promotion>();
 		promotions.add(new FamilyPromotion(30));
@@ -166,11 +166,11 @@ public class AppTest {
 		Promotion TwoDaysPromotion = new Promotion() {
 
 			@Override
-			public float applyPromotion(Rental rental) {
+			public float apply(Rental rental) {
 				float totalPrice = 0;
-				if (rental.getRentalUnit() > 2) {
-					float discount = (float) (rental.getPriceTotalRent() * 0.10);
-					totalPrice = rental.getPriceTotalRent() - discount;
+				if (rental.getTimeUnit() > 2) {
+					float discount = (float) (rental.getTotalPrice() * 0.10);
+					totalPrice = rental.getTotalPrice() - discount;
 				}
 				return totalPrice;
 			}
@@ -201,7 +201,7 @@ public class AppTest {
 		app.rent("29558573", 2, "perHour", 4);
 		Rental actualRental = app.getRentals().remove(0);
 
-		Date rentalDate = actualRental.getRentBegin();
+		Date rentalDate = actualRental.getDate();
 		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		String rentalBenig = formatoFecha.format(rentalDate);
 		String today = formatoFecha.format(new Date());
@@ -209,9 +209,9 @@ public class AppTest {
 		assertTrue(actualRental.getClientID() == "29558573");
 		assertEquals(rentalBenig, today);
 		assertTrue(actualRental.getBikes().size() == 2);
-		assertTrue(actualRental.getRentalType().getPrice() == 5);
-		assertTrue(actualRental.getRentalUnit() == 4);
-		assertTrue(actualRental.getPriceTotalRent() == 40.00);
+		assertTrue(actualRental.getType().getPrice() == 5);
+		assertTrue(actualRental.getTimeUnit() == 4);
+		assertTrue(actualRental.getTotalPrice() == 40.00);
 
 	}
 
